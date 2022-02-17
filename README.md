@@ -4,13 +4,18 @@
 <p align="center" width="100%">
     <img width="33%" src="https://user-images.githubusercontent.com/84074078/139298325-e95f151a-ae3d-4035-8a7a-8684c78f15ab.png">
 </p>
-Databases are the standard way to use dynamic information in modern applications, making them an integral part of almost any application. The course on basics of databases gives knows and hows about one of the most widely used systems for database management (DBMS - Database management system), in the development of modern applications - MySQL. Thanks this course I have acquired skills for working with relational databases, and was focused on basic functionalities such as working with tables, grouping functions, transactions, procedures and more. Main purpose of the course was actually working with databases, making them easier to use in real-world applications, as well as understanding them.
+
+In the course we will look in detail at working with a modern ORM technology: Hibernate, which is practically a standard for ORM in Java applications. Hibernate allows mapping between a relational database and an object-oriented model (Java classes) through the "database first" and "code first" approaches and provides a powerful object-oriented API for database queries and CRUD operations from Java. Spring Data, in turn, further upgrades the standard API and provides both an additional level of abstraction and an easy way to process database data. In this course we will demonstrate established practices in building a database layer of complex systems in Java applications through built-in implementations of the Repository template and the use of a service layer (Service Layer), as well as import and export to various data formats (JSON, XML).
 The actual themes in the course and extra the exercise units after every new lecture:
 
-### --- 1. Databases Introduction. Data Definition and Datatypes
-### --- 2. Basic CRUD
-### --- 3. Built-in Functions
-### --- 4. Data Aggregation
-### --- 5. Table Relations
-### --- 6. Subqueries and JOINs
-### --- 7. Database Programmability and Transactions
+### --- 1. Java DB Apps Introduction
+### --- 2. ORM Fundamentals
+### --- 3. Introduction to Hibernate
+### --- 4. Hibernate Code First
+### --- 5. Spring Data Intro
+### --- 6. Spring Data Advanced Quering
+### --- 7. Spring Data Auto Mapping Objects
+### --- 8. JSON Processing
+### --- 9. XML Processing
+### --- 10. Q&A
+### --- 11. Workshop - MVC Project
