@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 public class _02Main {
     public static void main(String[] args) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("CodeFirstEx");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("CodeFirst");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
