@@ -1,6 +1,7 @@
 package _05;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity(name="users")
 public class User {
@@ -8,15 +9,29 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String username;
+    @Column(name="first_name")
+    private String firstName;
 
-    @Enumerated(EnumType.STRING)
-    private AccountType type;
+    @Column(name="last_name")
+    private String lastName;
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    @OneToMany
+    private Set<BillingDetail> detail;
 
     public User() {}
 
-    public User(AccountType type) {
-        this.type = type;
+    public User(String firstName, String lastName, String email, String password, Set<BillingDetail> detail) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.detail = detail;
     }
 
     public int getId() {
@@ -27,11 +42,43 @@ public class User {
         this.id = id;
     }
 
-    public AccountType getType() {
-        return type;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setType(AccountType type) {
-        this.type = type;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<BillingDetail> getDetail() {
+        return detail;
+    }
+
+    public void setDetail(Set<BillingDetail> detail) {
+        this.detail = detail;
     }
 }

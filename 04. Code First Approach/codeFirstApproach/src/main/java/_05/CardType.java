@@ -1,6 +1,6 @@
 package _05;
 
-public enum AccountType {
+public enum CardType {
     FREE("Free"),
     TRAIL("Trail"),
     SILVER("Silver"),
@@ -8,7 +8,7 @@ public enum AccountType {
 
     private final String value;
 
-    AccountType(String name){
+    CardType(String name){
         this.value = name;
     }
 
