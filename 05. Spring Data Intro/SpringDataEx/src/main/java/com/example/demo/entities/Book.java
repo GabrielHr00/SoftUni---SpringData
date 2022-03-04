@@ -40,14 +40,15 @@ public class Book {
 
     public Book() {}
 
-    public Book(String title, String description, EditionType editionType, int copies, BigDecimal price, LocalDate releaseDate, AgeRestriction ageRestriction) {
+    public Book(String title, EditionType editionType, int copies, BigDecimal price, LocalDate releaseDate, AgeRestriction ageRestriction, Set<Category> categories, Author author) {
         this.title = title;
-        this.description = description;
         this.editionType = editionType;
         this.copies = copies;
         this.price = price;
         this.releaseDate = releaseDate;
         this.ageRestriction = ageRestriction;
+        this.categories = categories;
+        this.author = author;
     }
 
     public int getId() {
