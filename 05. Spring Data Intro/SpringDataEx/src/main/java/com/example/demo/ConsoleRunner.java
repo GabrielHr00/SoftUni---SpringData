@@ -36,6 +36,13 @@ public class ConsoleRunner implements CommandLineRunner {
 //        this.seedService.seedAll();
         this.getAfter2000();
         this.getAllAuthorsWithAtLeastOneBookAndReleaseDateBefore1990();
+        this.getAllAuthorsOrderedByCount();
+    }
+
+    private void getAllAuthorsOrderedByCount() {
+      authorRepository.findAll().stream()
+                .sorted((a,b) -> Integer.compare(a.getBooks().size(), b.getBooks().size()))
+                .forEach(e -> System.out.println(e.getFirstName() + " " + e.getLastName() + " with " + e.getBooks().size() + " books."));
     }
 
     private void getAllAuthorsWithAtLeastOneBookAndReleaseDateBefore1990() {
