@@ -37,6 +37,12 @@ public class ConsoleRunner implements CommandLineRunner {
         this.getAfter2000();
         this.getAllAuthorsWithAtLeastOneBookAndReleaseDateBefore1990();
         this.getAllAuthorsOrderedByCount();
+        this.getAllBooksWithAuthorGeorgePowellOrderByReleaseDateDESCBookTitleASC();
+    }
+
+    private void getAllBooksWithAuthorGeorgePowellOrderByReleaseDateDESCBookTitleASC() {
+        bookRepository.findAllByOrderByReleaseDateDescTitleAsc().stream().filter(e -> e.getAuthor().getFirstName().equals("George") && e.getAuthor().getLastName().equals("Powell"))
+                .forEach(e -> System.out.println(e.getTitle() + " " + e.getReleaseDate() + " " + e.getCopies()));
     }
 
     private void getAllAuthorsOrderedByCount() {
