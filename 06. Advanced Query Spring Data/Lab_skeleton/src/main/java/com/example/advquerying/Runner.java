@@ -1,59 +1,43 @@
 package com.example.advquerying;
 
-import com.example.advquerying.entities.Shampoo;
-import com.example.advquerying.entities.Size;
+import com.example.advquerying.repositories.IngredientRepository;
 import com.example.advquerying.repositories.ShampooRepository;
+import com.example.advquerying.services.IngredientService;
+import com.example.advquerying.services.ShampooService;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
-import java.util.HashSet;
+import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Component
 public class Runner implements CommandLineRunner {
 
     private ShampooRepository shampooRepository;
+    private ShampooService shampooService;
+    private IngredientService ingredientService;
 
-    public Runner(ShampooRepository shampooRepository) {
+    public Runner(ShampooRepository shampooRepository, ShampooService shampooService, IngredientService ingredientService) {
         this.shampooRepository = shampooRepository;
+        this.shampooService = shampooService;
+        this.ingredientService = ingredientService;
     }
 
-    @Override
+    @Transactional
     public void run(String... args) throws Exception {
-        System.out.println("im starting Spring Data");
+        //shampooService.findAllDistinctBySizeOrderById(Size.MEDIUM)
+        //shampooService.findAllByPriceGreaterThanOrderByPriceDesc(new BigDecimal(5))
+        //shampooService.findAllDistinctBySizeOrLabelIdOrderByPriceAsc(Size.MEDIUM, 10)
+        //ingredientService.findAllDistinctByNameStartingWith("M")
+        //ingredientService.findAllDistinctByNameInOrderByPriceAsc(List.of("Lavender", "Herbs", "Apple"))
+        //shampooService.findByIngredientsNameIn(List.of("Berry", "Mineral-Collagen"))
+        //.stream().forEach(System.out::println);
 
-        _01_findShampoosBySizeOrderedById();
-        _02_findShampoosBySizeOrLabelIdOrderByPrice();
-        _03_findShampoosByPriceGreaterThanOrderedByPrice();
-        _04_findIngredientsStartingWith();
-        _05_findIngredientsInList();
-
+        //System.out.println(shampooService.findByIngredientsCount(2));
+        //System.out.println(shampooService.findAllByPriceLessThan(BigDecimal.valueOf(8.50)));
+        System.out.println(ingredientService.deleteIngredientsByName("Nettle"));
     }
 
-    private void _05_findIngredientsInList() {
-        Set<String> names = new HashSet<>();
-        shampooRepository.findAllDistinctByIngredientsNameInOrderByPriceAsc(List.of("Lavender", "Herbs", "Apple")).stream().forEach(e -> e.getIngredients().stream().forEach(f -> names.add(f.getName())));
-        names.stream().forEach(System.out::println);
-    }
 
-    private void _04_findIngredientsStartingWith() {
-        Set<String> names = new HashSet<>();
-        shampooRepository.findAllDistinctByIngredientsNameStartingWith('M').stream().forEach(e -> e.getIngredients().stream().forEach(f -> names.add(f.getName())));
-        names.stream().forEach(System.out::println);
-    }
-
-    private void _03_findShampoosByPriceGreaterThanOrderedByPrice() {
-        shampooRepository.findAllByPriceGreaterThanOrderByPriceDesc(new BigDecimal(5)).stream().forEach(System.out::println);
-    }
-
-    private void _02_findShampoosBySizeOrLabelIdOrderByPrice() {
-        shampooRepository.findAllDistinctBySizeOrLabelIdOrderByPriceAsc(Size.MEDIUM, 10).stream().forEach(System.out::println);
-    }
-
-    private void _01_findShampoosBySizeOrderedById() {
-        shampooRepository.findAllDistinctBySizeOrderById(Size.MEDIUM).stream().forEach(System.out::println);
-    }
 }
