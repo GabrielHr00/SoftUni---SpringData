@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Component
@@ -24,7 +25,7 @@ public class Runner implements CommandLineRunner {
         this.ingredientService = ingredientService;
     }
 
-    @Transactional
+    @Override
     public void run(String... args) throws Exception {
         //shampooService.findAllDistinctBySizeOrderById(Size.MEDIUM)
         //shampooService.findAllByPriceGreaterThanOrderByPriceDesc(new BigDecimal(5))
@@ -36,7 +37,10 @@ public class Runner implements CommandLineRunner {
 
         //System.out.println(shampooService.findByIngredientsCount(2));
         //System.out.println(shampooService.findAllByPriceLessThan(BigDecimal.valueOf(8.50)));
-        System.out.println(ingredientService.deleteIngredientsByName("Nettle"));
+        //System.out.println(ingredientService.deleteByName("Nettle"));
+        //ingredientService.increasePriceByPercentage(BigDecimal.valueOf(0.1));
+        ingredientService.increasePriceByPercentageInList(BigDecimal.valueOf(0.1), List.of("Active-Caffeine"));
+
     }
 
 
