@@ -1,6 +1,7 @@
 package com.example.springintro;
 
 import com.example.springintro.model.entity.Book;
+import com.example.springintro.model.entity.BookSummary;
 import com.example.springintro.model.entity.EditionType;
 import com.example.springintro.service.AuthorService;
 import com.example.springintro.service.BookService;
@@ -15,6 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Formatter;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 @Component
 public class CommandLineRunnerImpl implements CommandLineRunner {
@@ -59,6 +61,41 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
         // this.authorService.findAllByFirstNameEndingWith("e").forEach(System.out::println);
 
         // _07
+        String word = "sK";
+        this.bookService.findAllByTitleContaining(word).stream().forEach(System.out::println);
+
+
+        // _08
+        // this.bookService.findAllByAuthorLastNameStartingWith("Ric").forEach(e -> System.out.println(e.getTitle() + " from " + e.getAuthor().getFirstName() + " " + e.getAuthor().getLastName()));
+
+
+        // _09
+//        int count = this.bookService.countBooksWithTitleLongerThan(12);
+//        System.out.println(String.format("There are %d books with longer title than %d symbols", count, 12));
+
+        // _10
+
+
+
+        // _11
+//        BookSummary things_fall_apart = this.bookService.getInformationForTitle("Things Fall Apart");
+//        System.out.println(things_fall_apart.getTitle() + " " + things_fall_apart.getEditionType() + " " + things_fall_apart.getAgeRestriction() + " " + things_fall_apart.getPrice());
+
+        // _12
+//        Scanner sc = new Scanner(System.in);
+//        String date = sc.nextLine();
+//        int amount = Integer.parseInt(sc.nextLine());
+//        int booksUpdated = this.bookService.addCopiesToBooksAfter(date, amount);
+//        System.out.printf("%d books are released after %s, so total of %d book copies were added\n",booksUpdated, date, amount * booksUpdated);
+
+        // _13
+//        Scanner sc = new Scanner(System.in);
+//        int amount = Integer.parseInt(sc.nextLine());
+//        this.bookService.deleteWithCopiesLessThan(amount);
+
+        // _14
+//        long books = this.bookService.storedBooksForAuthor("Amanda", "Rice");
+//        System.out.printf("%s %s has written %d books\n","Amanda", "Rice", books);
     }
 
     private void seedData() throws IOException {

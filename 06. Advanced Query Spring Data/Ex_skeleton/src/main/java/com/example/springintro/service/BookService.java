@@ -1,6 +1,7 @@
 package com.example.springintro.service;
 
 import com.example.springintro.model.entity.Book;
+import com.example.springintro.model.entity.BookSummary;
 import com.example.springintro.model.entity.EditionType;
 
 import java.io.IOException;
@@ -28,4 +29,17 @@ public interface BookService {
 
     List<Book> findAllByReleaseDateBefore(LocalDate date);
 
+    List<Book> findAllByAuthorLastNameStartingWith(String startsWith);
+
+    int countBooksWithTitleLongerThan(int length);
+
+    BookSummary getInformationForTitle(String title);
+
+    int addCopiesToBooksAfter(String date, int amount);
+
+    int deleteWithCopiesLessThan(int copy);
+
+    long storedBooksForAuthor(String firstName, String lastName);
+
+    List<String> findAllByTitleContaining(String word);
 }
