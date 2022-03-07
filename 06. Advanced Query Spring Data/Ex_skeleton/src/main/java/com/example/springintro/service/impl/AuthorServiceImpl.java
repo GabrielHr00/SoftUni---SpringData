@@ -1,6 +1,7 @@
 package com.example.springintro.service.impl;
 
 import com.example.springintro.model.entity.Author;
+import com.example.springintro.model.entity.Book;
 import com.example.springintro.repository.AuthorRepository;
 import com.example.springintro.service.AuthorService;
 import org.springframework.stereotype.Service;
@@ -60,5 +61,10 @@ public class AuthorServiceImpl implements AuthorService {
                         author.getLastName(),
                         author.getBooks().size()))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<String> findAllByFirstNameEndingWith(String endsWith) {
+        return this.authorRepository.findAllByFirstNameEndingWith(endsWith).stream().map(e -> e.getFirstName() + " " + e.getLastName()).collect(Collectors.toList());
     }
 }

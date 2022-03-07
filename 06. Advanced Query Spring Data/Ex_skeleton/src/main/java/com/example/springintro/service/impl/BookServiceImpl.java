@@ -13,9 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -84,6 +82,26 @@ public class BookServiceImpl implements BookService {
         AgeRestriction ageRestriction = AgeRestriction.valueOf(ageRestr.toUpperCase());
         return this.bookRepository.findAllByAgeRestriction(ageRestriction)
                 .stream().map(e -> e.getTitle()).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<String> findAllByEditionTypeAndCopiesLessThan(EditionType ed, int copies) {
+        return this.bookRepository.findAllByEditionTypeAndCopiesLessThan(ed, copies).stream().map(e -> e.getTitle()).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Book> findAllByPriceLessThanAndPriceGreaterThan(BigDecimal first, BigDecimal second) {
+        return this.bookRepository.findAllByPriceLessThanAndPriceGreaterThan(first, second);
+    }
+
+    @Override
+    public List<String> findByReleaseDateYearNot(int releaseYear) {
+        return this.bookRepository.findByReleaseDateYearNot(releaseYear).stream().map(e -> e.getTitle()).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Book> findAllByReleaseDateBefore(LocalDate date) {
+        return this.bookRepository.findAllByReleaseDateBefore(date);
     }
 
     private Book createBookFromInfo(String[] bookInfo) {
