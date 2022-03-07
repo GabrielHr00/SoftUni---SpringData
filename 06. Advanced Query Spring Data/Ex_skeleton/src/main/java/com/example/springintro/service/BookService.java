@@ -3,6 +3,7 @@ package com.example.springintro.service;
 import com.example.springintro.model.entity.Book;
 import com.example.springintro.model.entity.BookSummary;
 import com.example.springintro.model.entity.EditionType;
+import org.springframework.data.repository.query.Param;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -42,4 +43,5 @@ public interface BookService {
     long storedBooksForAuthor(String firstName, String lastName);
 
     List<String> findAllByTitleContaining(String word);
+
 }

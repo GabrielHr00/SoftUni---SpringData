@@ -1,6 +1,7 @@
 package com.example.springintro.service.impl;
 
 import com.example.springintro.model.entity.Author;
+import com.example.springintro.model.entity.AuthorNamesTotalCount;
 import com.example.springintro.model.entity.Book;
 import com.example.springintro.repository.AuthorRepository;
 import com.example.springintro.service.AuthorService;
@@ -67,4 +68,10 @@ public class AuthorServiceImpl implements AuthorService {
     public List<String> findAllByFirstNameEndingWith(String endsWith) {
         return this.authorRepository.findAllByFirstNameEndingWith(endsWith).stream().map(e -> e.getFirstName() + " " + e.getLastName()).collect(Collectors.toList());
     }
+
+    @Override
+    public List<AuthorNamesTotalCount> findCountByAuthorName() {
+        return this.authorRepository.findCountByAuthorName();
+    }
+
 }

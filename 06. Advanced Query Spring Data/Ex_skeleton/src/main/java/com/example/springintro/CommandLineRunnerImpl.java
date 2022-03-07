@@ -1,5 +1,6 @@
 package com.example.springintro;
 
+import com.example.springintro.model.entity.AuthorNamesTotalCount;
 import com.example.springintro.model.entity.Book;
 import com.example.springintro.model.entity.BookSummary;
 import com.example.springintro.model.entity.EditionType;
@@ -61,8 +62,8 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
         // this.authorService.findAllByFirstNameEndingWith("e").forEach(System.out::println);
 
         // _07
-        String word = "sK";
-        this.bookService.findAllByTitleContaining(word).stream().forEach(System.out::println);
+//        String word = "sK";
+//        this.bookService.findAllByTitleContaining(word).stream().forEach(System.out::println);
 
 
         // _08
@@ -74,7 +75,8 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
 //        System.out.println(String.format("There are %d books with longer title than %d symbols", count, 12));
 
         // _10
-
+        List<AuthorNamesTotalCount> countByAuthorName = this.authorService.findCountByAuthorName();
+        countByAuthorName.stream().forEach(e -> System.out.println(e.getFirstName() + " " + e.getLastName() + " " + e.getCopy()));
 
 
         // _11
