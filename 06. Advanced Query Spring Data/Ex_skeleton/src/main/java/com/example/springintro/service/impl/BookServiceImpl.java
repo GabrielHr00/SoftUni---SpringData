@@ -7,6 +7,7 @@ import com.example.springintro.service.BookService;
 import com.example.springintro.service.CategoryService;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Files;
@@ -102,6 +103,44 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> findAllByReleaseDateBefore(LocalDate date) {
         return this.bookRepository.findAllByReleaseDateBefore(date);
+    }
+
+    @Override
+    public List<Book> findAllByAuthorLastNameStartingWith(String startsWith) {
+        return this.bookRepository.findAllByAuthorLastNameStartingWith(startsWith);
+    }
+
+    @Override
+    public int countBooksWithTitleLongerThan(int length) {
+        return this.bookRepository.countBooksWithTitleLongerThan(length);
+    }
+
+    @Override
+    public BookSummary getInformationForTitle(String title) {
+        return this.bookRepository.findSummaryForTitle(title);
+    }
+
+    @Override
+    public int addCopiesToBooksAfter(String date, int amount) {
+        DateTimeFormatter dateFormats = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        LocalDate after = LocalDate.parse(date, dateFormats);
+
+        return this.bookRepository.addCopiesToBooksAfter(after, amount);
+    }
+
+    @Override
+    public int deleteWithCopiesLessThan(int copy) {
+        return this.bookRepository.deleteByCopiesLessThan(copy);
+    }
+
+    @Override
+    public long storedBooksForAuthor(String firstName, String lastName) {
+        return this.bookRepository.storedBooksForAuthor(firstName, lastName);
+    }
+
+    @Override
+    public List<String> findAllByTitleContaining(String word) {
+        return this.bookRepository.findAllByTitleContaining(word).stream().map(e -> e.getTitle()).collect(Collectors.toList());
     }
 
     private Book createBookFromInfo(String[] bookInfo) {
