@@ -1,5 +1,7 @@
 package com.example.demo.entities;
 
+import org.springframework.data.jpa.repository.Modifying;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
