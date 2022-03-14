@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getLoggedUser() {
         if(this.currentUser == null){
-            throw new UserNotLoggedInException("No users logged in!");
+            throw new UserNotLoggedInException("Cannot log out. No user was logged in.");
         }
         return this.currentUser;
     }
