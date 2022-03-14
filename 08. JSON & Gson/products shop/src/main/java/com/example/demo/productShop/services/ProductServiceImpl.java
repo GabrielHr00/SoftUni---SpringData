@@ -1,5 +1,6 @@
 package com.example.demo.productShop.services;
 
+import com.example.demo.productShop.entities.CategoryStats;
 import com.example.demo.productShop.entities.ProductWithoutBuyerDTO;
 import com.example.demo.productShop.repositories.ProductsRepository;
 import org.springframework.stereotype.Service;
@@ -23,5 +24,10 @@ public class ProductServiceImpl implements ProductService{
 
         return this.productsRepository.findAllByPriceBetweenAndBuyerIsNullOrderByPriceAsc(start, end);
 
+    }
+
+    @Override
+    public List<CategoryStats> getCategoryStatistics() {
+        return this.productsRepository.getCategoryStats();
     }
 }
