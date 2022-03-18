@@ -1,21 +1,22 @@
 package com.example.demo.productShop.entities;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
+import java.util.List;
 
+@XmlRootElement(name = "products")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ProductImportDTO {
-    private String name;
-    private BigDecimal price;
+    @XmlElement(name = "product")
+    private List<ProductNameDTO> products;
 
-    public ProductImportDTO(String name, BigDecimal price) {
-        this.name = name;
-        this.price = price;
+    public ProductImportDTO() {
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
+    public List<ProductNameDTO> getProducts() {
+        return products;
     }
 }

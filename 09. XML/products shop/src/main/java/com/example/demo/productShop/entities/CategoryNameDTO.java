@@ -4,17 +4,19 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.List;
 
-@XmlRootElement(name = "users")
+@XmlRootElement(name = "category")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class UserImportDTO {
-    @XmlElement(name = "user")
-    private List<UserNameDTO> users;
+public class CategoryNameDTO {
 
-    public UserImportDTO() {}
+    @XmlElement
+    private String name;
 
-    public List<UserNameDTO> getUsers() {
-        return users;
+    public CategoryNameDTO() {
+    }
+
+    public String getName() {
+        return name;
     }
 }
+

@@ -10,24 +10,14 @@ import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService{
-    private final ProductsRepository productsRepository;
-
-    public ProductServiceImpl(ProductsRepository productsRepository) {
-        this.productsRepository = productsRepository;
-    }
-
 
     @Override
     public List<ProductWithoutBuyerDTO> getProductsInPriceRangeForSell(float from, float to) {
-        BigDecimal start = BigDecimal.valueOf(from);
-        BigDecimal end = BigDecimal.valueOf(to);
-
-        return this.productsRepository.findAllByPriceBetweenAndBuyerIsNullOrderByPriceAsc(start, end);
-
+        return null;
     }
 
     @Override
     public List<CategoryStats> getCategoryStatistics() {
-        return this.productsRepository.getCategoryStats();
+        return null;
     }
 }

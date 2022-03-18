@@ -1,13 +1,18 @@
 package com.example.demo.productShop.entities;
 
+import javax.xml.bind.annotation.*;
+import java.util.List;
+
+@XmlRootElement(name = "categories")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class CategoryImportDTO {
-    private String name;
 
-    public CategoryImportDTO(String name) {
-        this.name = name;
-    }
+    @XmlElement(name = "category")
+    private List<CategoryNameDTO> categories;
 
-    public String getName() {
-        return name;
+    public CategoryImportDTO() {}
+
+    public List<CategoryNameDTO> getCategories() {
+        return categories;
     }
 }
