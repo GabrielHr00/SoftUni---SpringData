@@ -98,4 +98,11 @@ public class User {
     public void setFriends(Set<User> friends) {
         this.friends = friends;
     }
+
+    public String getFullName() {
+        if(this.getFirstName() == null){
+            return this.getLastName();
+        }
+        return this.getFirstName() + " " + this.getLastName();
+    }
 }

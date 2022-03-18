@@ -8,14 +8,18 @@ import java.util.List;
 
 @XmlRootElement(name = "products")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ProductImportDTO {
-    @XmlElement(name = "product")
-    private List<ProductNameDTO> products;
+public class ProductsInRangeDTO {
 
-    public ProductImportDTO() {
+    @XmlElement(name = "product")
+    List<ProductWithAttributesDTO> products;
+
+    public ProductsInRangeDTO() {}
+
+    public ProductsInRangeDTO(List<ProductWithAttributesDTO> products) {
+        this.products = products;
     }
 
-    public List<ProductNameDTO> getProducts() {
+    public List<ProductWithAttributesDTO> getProducts() {
         return products;
     }
 }
