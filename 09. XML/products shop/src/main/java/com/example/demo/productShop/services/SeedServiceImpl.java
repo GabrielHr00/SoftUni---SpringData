@@ -4,12 +4,13 @@ import com.example.demo.productShop.entities.*;
 import com.example.demo.productShop.repositories.CategoryRepository;
 import com.example.demo.productShop.repositories.ProductsRepository;
 import com.example.demo.productShop.repositories.UserRepository;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.math.BigDecimal;
@@ -18,64 +19,69 @@ import java.util.stream.Collectors;
 
 @Service
 public class SeedServiceImpl implements SeedService{
-    private static final String USERS_JSON = "/Users/mac/Desktop/Mac/github/SoftUni---SpringData/08. JSON & Gson/products shop/src/main/resources/productShop/productShop/users.json";
-    private static final String CATEGORIES_JSON = "/Users/mac/Desktop/Mac/github/SoftUni---SpringData/08. JSON & Gson/products shop/src/main/resources/productShop/productShop/categories.json";
-    private static final String PRODUCTS_JSON = "/Users/mac/Desktop/Mac/github/SoftUni---SpringData/08. JSON & Gson/products shop/src/main/resources/productShop/productShop/products.json";
+    private static final String USERS_XML = "/Users/mac/Desktop/Mac/github/SoftUni---SpringData/09. XML/products shop/src/main/resources/productShop/productShop/users.xml";
+    private static final String CATEGORIES_XML = "/Users/mac/Desktop/Mac/github/SoftUni---SpringData/09. XML/products shop/src/main/resources/productShop/productShop/categories.xml";
+    private static final String PRODUCTS_XML = "/Users/mac/Desktop/Mac/github/SoftUni---SpringData/09. XML/products shop/src/main/resources/productShop/productShop/products.xml";
 
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
     private final ProductsRepository productsRepository;
-    private final ModelMapper modelMapper;
-    private final Gson gson;
+
+    private final ModelMapper mapper;
 
     @Autowired
     public SeedServiceImpl(UserRepository userRepository, CategoryRepository categoryRepository, ProductsRepository productsRepository) {
         this.userRepository = userRepository;
         this.categoryRepository = categoryRepository;
         this.productsRepository = productsRepository;
-        this.modelMapper = new ModelMapper();
-        this.gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .create();
+        this.mapper = new ModelMapper();
     }
 
     @Override
-    public void seedUsers() throws FileNotFoundException {
-        FileReader fileReader = new FileReader(USERS_JSON);
-        UserImportDTO[] userImportDTOS = this.gson.fromJson(fileReader, UserImportDTO[].class);
+    public void seedUsers() throws FileNotFoundException, JAXBException {
+        JAXBContext context = JAXBContext.newInstance(UserImportDTO.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
 
-        List<User> users = Arrays.stream(userImportDTOS)
-                .map(importDto -> this.modelMapper.map(importDto, User.class))
+        UserImportDTO unmarshal = (UserImportDTO) unmarshaller.unmarshal(new FileReader(USERS_XML));
+        List<User> entities = unmarshal
+                .getUsers()
+                .stream()
+                .map(dto -> this.mapper.map(dto, User.class))
                 .collect(Collectors.toList());
 
-        this.userRepository.saveAll(users);
+        this.userRepository.saveAll(entities);
     }
 
     @Override
-    public void seedCategories() throws FileNotFoundException {
-        FileReader fileReader = new FileReader(CATEGORIES_JSON);
-        CategoryImportDTO[] userImportDTOS = this.gson.fromJson(fileReader, CategoryImportDTO[].class);
+    public void seedCategories() throws FileNotFoundException, JAXBException{
+        JAXBContext context = JAXBContext.newInstance(CategoryImportDTO.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
 
-        List<Category> categories = Arrays.stream(userImportDTOS)
-                .map(importDto -> this.modelMapper.map(importDto, Category.class))
+        CategoryImportDTO result = (CategoryImportDTO) unmarshaller.unmarshal(new FileReader(CATEGORIES_XML));
+        List<Category> entities = result.
+                getCategories()
+                .stream()
+                .map(e -> new Category(e.getName()))
                 .collect(Collectors.toList());
 
-        this.categoryRepository.saveAll(categories);
+        this.categoryRepository.saveAll(entities);
     }
 
     @Override
-    public void seedProducts() throws FileNotFoundException {
-        FileReader fileReader = new FileReader(PRODUCTS_JSON);
-        ProductImportDTO[] userImportDTOS = this.gson.fromJson(fileReader, ProductImportDTO[].class);
+    public void seedProducts() throws FileNotFoundException, JAXBException {
+        JAXBContext context = JAXBContext.newInstance(ProductImportDTO.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
 
-        List<Product> products = Arrays.stream(userImportDTOS)
-                .map(importDto -> this.modelMapper.map(importDto, Product.class))
+        ProductImportDTO result = (ProductImportDTO) unmarshaller.unmarshal(new FileReader(PRODUCTS_XML));
+        List<Product> entities = result.getProducts()
+                .stream()
+                .map(e -> new Product(e.getName(), e.getPrice()))
+                .map(this::sendRandomCategories)
                 .map(this::setRandomSeller)
                 .map(this::setRandomBuyer)
-                .map(this::sendRandomCategories)
                 .collect(Collectors.toList());
 
-        this.productsRepository.saveAll(products);
+        this.productsRepository.saveAll(entities);
     }
 
     private Product sendRandomCategories(Product product) {

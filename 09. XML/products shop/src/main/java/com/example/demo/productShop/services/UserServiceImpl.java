@@ -12,25 +12,14 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService{
-    private final UserRepository userRepository;
-    private final ModelMapper mapper;
-
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-        this.mapper = new ModelMapper();
-    }
 
     @Override
-    @Transactional
     public List<UserWithSoldProductsDTO> getUsersWithSoldProducts() {
-        List<User> allWithSoldProducts = this.userRepository.findAllWithSoldProducts();
-        return allWithSoldProducts.stream().map(user -> this.mapper.map(user, UserWithSoldProductsDTO.class)).collect(Collectors.toList());
+        return null;
     }
 
     @Override
     public List<User> getUsersWithSoldProductsOrderByCount() {
-        List<User> allWithSoldProductsOrderByItems = this.userRepository.findAllWithSoldProductsOrderByItems();
-        allWithSoldProductsOrderByItems.get(0).getSellingItems().size();
         return null;
     }
 }
