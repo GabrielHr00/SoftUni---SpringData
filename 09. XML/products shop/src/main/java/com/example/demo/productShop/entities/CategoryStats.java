@@ -1,49 +1,29 @@
 package com.example.demo.productShop.entities;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
+import java.util.List;
 
+@XmlRootElement(name = "categories")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class CategoryStats {
-    private String category;
-    private long count;
-    private double averagePrice;
-    private BigDecimal totalRevenue;
+    @XmlElement(name = "category")
+    private List<CategoryPropsDTO> categories;
 
-    public CategoryStats(String category, long count, double averagePrice, BigDecimal totalRevenue) {
-        this.category = category;
-        this.count = count;
-        this.averagePrice = averagePrice;
-        this.totalRevenue = totalRevenue;
+    public CategoryStats() {}
+
+    public CategoryStats(List<CategoryPropsDTO> categories) {
+        this.categories = categories;
     }
 
-    public String getCategory() {
-        return category;
+    public List<CategoryPropsDTO> getCategories() {
+        return categories;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public long getCount() {
-        return count;
-    }
-
-    public void setCount(long count) {
-        this.count = count;
-    }
-
-    public double getAveragePrice() {
-        return averagePrice;
-    }
-
-    public void setAveragePrice(double averagePrice) {
-        this.averagePrice = averagePrice;
-    }
-
-    public BigDecimal getTotalRevenue() {
-        return totalRevenue;
-    }
-
-    public void setTotalRevenue(BigDecimal totalRevenue) {
-        this.totalRevenue = totalRevenue;
+    public void setCategories(List<CategoryPropsDTO> categories) {
+        this.categories = categories;
     }
 }

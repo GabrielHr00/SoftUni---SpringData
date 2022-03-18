@@ -9,4 +9,6 @@ import java.util.List;
 
 public interface ProductService {
     ProductsInRangeDTO productsInRange(float from, float to);
+
+    CategoryStats categoryStatsWithCount();
 }
