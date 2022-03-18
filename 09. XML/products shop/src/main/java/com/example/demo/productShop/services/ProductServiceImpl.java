@@ -44,4 +44,11 @@ public class ProductServiceImpl implements ProductService{
                 .collect(Collectors.toList());
         return new ProductsInRangeDTO(dtos);
     }
+
+    @Override
+    public CategoryStats categoryStatsWithCount() {
+        List<CategoryPropsDTO> categoryStats = this.productsRepository.getCategoryStats();
+        CategoryStats dtos = new CategoryStats(categoryStats);
+        return dtos;
+    }
 }
