@@ -1,9 +1,12 @@
 package com.example.demo.productShop.entities;
 
+import org.modelmapper.Converter;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.DoubleStream;
 
 @Entity
 @Table(name = "products")
@@ -84,4 +87,5 @@ public class Product {
     public void setCategories(Set<Category> categories) {
         this.categories = categories;
     }
+
 }

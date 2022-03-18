@@ -1,31 +1,34 @@
 package com.example.demo.productShop;
 
-import com.example.demo.productShop.entities.CategoryStats;
-import com.example.demo.productShop.entities.ProductWithoutBuyerDTO;
-import com.example.demo.productShop.entities.UserWithSoldProductsDTO;
+import com.example.demo.productShop.entities.ProductsInRangeDTO;
 import com.example.demo.productShop.services.ProductService;
 import com.example.demo.productShop.services.SeedService;
-import com.example.demo.productShop.services.UserService;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
 
 @Component
 public class ProductShopRunner implements CommandLineRunner {
     private final SeedService seedService;
+    private final ProductService productService;
 
     @Autowired
-    public ProductShopRunner(SeedService seedService) {
+    public ProductShopRunner(SeedService seedService, ProductService productService) {
         this.seedService = seedService;
+        this.productService = productService;
     }
 
     @Override
     public void run(String... args) throws Exception {
-        seedService.seedAll();
+        JAXBContext context = JAXBContext.newInstance(ProductsInRangeDTO.class);
+        Marshaller marshaller = context.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+        ProductsInRangeDTO productsInRangeDTO = this.productService.productsInRange(500, 1000);
+        marshaller.marshal(productsInRangeDTO, System.out);
 
     }
 
