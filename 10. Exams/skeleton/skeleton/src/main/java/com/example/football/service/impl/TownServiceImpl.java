@@ -10,15 +10,13 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.ConstraintViolation;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
 @Service
@@ -32,7 +30,7 @@ public class TownServiceImpl implements TownService {
     public TownServiceImpl(TownRepository townRepository) {
         this.townRepository = townRepository;
         this.mapper = new ModelMapper();
-        this.gson = new GsonBuilder().setPrettyPrinting().create();
+        this.gson = new GsonBuilder().create();
     }
 
     @Override
@@ -42,32 +40,61 @@ public class TownServiceImpl implements TownService {
 
     @Override
     public String readTownsFileContent() throws IOException {
-        Path path = Path.of("src", "main",  "resources", "files",  "json", "towns.json");
+        Path path = Path.of("skeleton", "src", "main", "resources", "files", "json", "towns.json");
         List<String> strings = Files.readAllLines(path);
         return String.join("\n", strings);
     }
 
     @Override
     public String importTowns() throws IOException {
-        TownImportDTO[] townImportDTO = gson.fromJson(this.readTownsFileContent(), TownImportDTO[].class);
+        String json = this.readTownsFileContent();
+
+        TownImportDTO[] importTownDTOs = this.gson.fromJson(json, TownImportDTO[].class);
 
         List<String> result = new ArrayList<>();
-        for (var i : townImportDTO) {
-            if(!i.isValid()){
-                result.add("Invalid Town");
-            }
+        for (TownImportDTO importTownDTO : importTownDTOs) {
 
-            Optional<Town> byName = this.townRepository.findByName(i.getName());
-            if(byName.isPresent()){
+            if (importTownDTO.isValid()) {
+                Optional<Town> optTown =
+                        this.townRepository.findByName(importTownDTO.getName());
+
+                if (optTown.isEmpty()) {
+                    Town town = this.mapper.map(importTownDTO, Town.class);
+
+                    this.townRepository.save(town);
+
+                    String msg = String.format("Successfully imported Town %s - %d",
+                            town.getName(), town.getPopulation());
+
+                    result.add(msg);
+                } else {
+                    result.add("Invalid Town");
+                }
+            } else {
                 result.add("Invalid Town");
-            }
-            else {
-                Town town = mapper.map(i, Town.class);
-                this.townRepository.save(town);
-                result.add("Successfully imported Town " + town.getName() + " - " + town.getPopulation());
             }
         }
 
         return String.join("\n", result);
+//        TownImportDTO[] townImportDTO = gson.fromJson(this.readTownsFileContent(), TownImportDTO[].class);
+//
+//        List<String> result = new ArrayList<>();
+//        for (var i : townImportDTO) {
+//            if(!i.isValid()){
+//                result.add("Invalid Town");
+//            }
+//
+//            Optional<Town> byName = this.townRepository.findByName(i.getName());
+//            if(byName.isPresent()){
+//                result.add("Invalid Town");
+//            }
+//            else {
+//                Town town = mapper.map(i, Town.class);
+//                this.townRepository.save(town);
+//                result.add("Successfully imported Town " + town.getName() + " - " + town.getPopulation());
+//            }
+//        }
+//
+//        return String.join("\n", result);
     }
 }

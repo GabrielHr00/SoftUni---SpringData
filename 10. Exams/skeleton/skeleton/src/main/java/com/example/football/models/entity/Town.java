@@ -15,16 +15,10 @@ public class Town {
     @Column(nullable = false)
     private int population;
 
-    @Column(name = "travel_guide", nullable = false, columnDefinition = "TEXT")
-    private String traverGuide;
+    @Column(name="travel_guide", nullable = false, columnDefinition = "TEXT")
+    private String travelGuide;
 
     public Town() {
-    }
-
-    public Town(String name, int population, String traverGuide) {
-        this.name = name;
-        this.population = population;
-        this.traverGuide = traverGuide;
     }
 
     public long getId() {
@@ -52,10 +46,10 @@ public class Town {
     }
 
     public String getTraverGuide() {
-        return traverGuide;
+        return travelGuide;
     }
 
     public void setTraverGuide(String traverGuide) {
-        this.traverGuide = traverGuide;
+        this.travelGuide = traverGuide;
     }
 }
