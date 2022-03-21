@@ -8,7 +8,6 @@ public class TownImportDTO {
 
     private int population;
 
-    @Column(name = "travel_guide")
     private String travelGuide;
 
     public TownImportDTO() {
@@ -18,24 +17,12 @@ public class TownImportDTO {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getPopulation() {
         return population;
     }
 
-    public void setPopulation(int population) {
-        this.population = population;
-    }
-
     public String getTravelGuide() {
         return travelGuide;
-    }
-
-    public void setTravelGuide(String travelGuide) {
-        this.travelGuide = travelGuide;
     }
 
     public boolean isValid(){
