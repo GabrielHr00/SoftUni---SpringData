@@ -47,54 +47,25 @@ public class TownServiceImpl implements TownService {
 
     @Override
     public String importTowns() throws IOException {
-        String json = this.readTownsFileContent();
-
-        TownImportDTO[] importTownDTOs = this.gson.fromJson(json, TownImportDTO[].class);
+        TownImportDTO[] townImportDTO = gson.fromJson(this.readTownsFileContent(), TownImportDTO[].class);
 
         List<String> result = new ArrayList<>();
-        for (TownImportDTO importTownDTO : importTownDTOs) {
-
-            if (importTownDTO.isValid()) {
-                Optional<Town> optTown =
-                        this.townRepository.findByName(importTownDTO.getName());
-
-                if (optTown.isEmpty()) {
-                    Town town = this.mapper.map(importTownDTO, Town.class);
-
-                    this.townRepository.save(town);
-
-                    String msg = String.format("Successfully imported Town %s - %d",
-                            town.getName(), town.getPopulation());
-
-                    result.add(msg);
-                } else {
-                    result.add("Invalid Town");
-                }
-            } else {
+        for (var i : townImportDTO) {
+            if(!i.isValid()){
                 result.add("Invalid Town");
+            }
+
+            Optional<Town> byName = this.townRepository.findByName(i.getName());
+            if(byName.isPresent()){
+                result.add("Invalid Town");
+            }
+            else {
+                Town town = mapper.map(i, Town.class);
+                this.townRepository.save(town);
+                result.add("Successfully imported Town " + town.getName() + " - " + town.getPopulation());
             }
         }
 
         return String.join("\n", result);
-//        TownImportDTO[] townImportDTO = gson.fromJson(this.readTownsFileContent(), TownImportDTO[].class);
-//
-//        List<String> result = new ArrayList<>();
-//        for (var i : townImportDTO) {
-//            if(!i.isValid()){
-//                result.add("Invalid Town");
-//            }
-//
-//            Optional<Town> byName = this.townRepository.findByName(i.getName());
-//            if(byName.isPresent()){
-//                result.add("Invalid Town");
-//            }
-//            else {
-//                Town town = mapper.map(i, Town.class);
-//                this.townRepository.save(town);
-//                result.add("Successfully imported Town " + town.getName() + " - " + town.getPopulation());
-//            }
-//        }
-//
-//        return String.join("\n", result);
     }
 }
