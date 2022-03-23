@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class PlayerServiceImpl implements PlayerService {
@@ -105,6 +106,10 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public String exportBestPlayers() {
-        return null;
+        LocalDate start = LocalDate.of(1995, 1, 1);
+        LocalDate end = LocalDate.of(2003, 1, 1);
+        List<Player> allPlayers = this.playerRepository.findAllByBirthDateBetweenOrderByStatShootingDescStatPassingDescStatEnduranceDescLastNameAsc(start, end);
+        List<String> collect = allPlayers.stream().map(e -> e.toString()).collect(Collectors.toList());
+        return String.join("\n", collect);
     }
 }
