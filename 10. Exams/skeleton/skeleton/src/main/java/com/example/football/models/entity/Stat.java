@@ -9,10 +9,13 @@ public class Stat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(nullable = false)
     private float shooting;
 
+    @Column(nullable = false)
     private float passing;
 
+    @Column(nullable = false)
     private float endurance;
 
     public Stat() {
