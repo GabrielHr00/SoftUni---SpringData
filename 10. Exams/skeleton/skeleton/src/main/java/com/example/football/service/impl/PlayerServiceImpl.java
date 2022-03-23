@@ -1,5 +1,6 @@
 package com.example.football.service.impl;
 
+import com.example.football.config.ApplicationBeanConfiguration;
 import com.example.football.models.dto.ImportPlayerDTO;
 import com.example.football.models.dto.ImportPlayersDTO;
 import com.example.football.models.dto.ImportStatDTO;
@@ -16,6 +17,7 @@ import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.ModelMap;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -53,16 +55,7 @@ public class PlayerServiceImpl implements PlayerService {
         this.unmarshaller = context.createUnmarshaller();
         this.validator = Validation.buildDefaultValidatorFactory().getValidator();
         this.mapper = new ModelMapper();
-
-        Converter<String, LocalDate> converter = s -> s.getSource() == null ? null :
-                LocalDate.parse(s.getSource(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-
-        TypeMap<ImportPlayerDTO, Player> typeMap =
-                this.mapper.createTypeMap(ImportPlayerDTO.class, Player.class);
-
-        TypeMap<ImportPlayerDTO, Player> importPlayerDTOPlayerTypeMap = typeMap.addMappings(e -> e.using(converter).map(ImportPlayerDTO::getBirthDate, Player::setBirthDate));
-        
-
+        this.mapper.addConverter(e -> LocalDate.parse(e.getSource(), DateTimeFormatter.ofPattern("dd/MM/yyyy")), String.class, LocalDate.class);
     }
 
     @Override
@@ -83,7 +76,7 @@ public class PlayerServiceImpl implements PlayerService {
         List<String> result = new ArrayList<>();
         for (ImportPlayerDTO p : players) {
             Set<ConstraintViolation<ImportPlayerDTO>> validate =
-                    this.validator.validate(p, Player.class);
+                    this.validator.validate(p);
 
             if(validate.isEmpty()){
                 Optional<Player> findBy = this.playerRepository.findByEmail(p.getEmail());

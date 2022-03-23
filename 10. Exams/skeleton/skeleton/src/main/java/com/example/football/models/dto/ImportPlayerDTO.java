@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.time.LocalDate;
 
 @XmlRootElement(name = "player")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -28,9 +27,9 @@ public class ImportPlayerDTO {
     private String email;
 
     @XmlElement(name = "birth-date")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private LocalDate birthDate;
+    private String birthDate;
 
+    @XmlElement
     private PlayerPosition position;
 
     @XmlElement(name = "town")
@@ -69,11 +68,11 @@ public class ImportPlayerDTO {
         this.email = email;
     }
 
-    public LocalDate getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 
