@@ -2,6 +2,7 @@ package com.example.football.models.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Table(name = "players")
@@ -107,5 +108,25 @@ public class Player {
 
     public void setTown(Town town) {
         this.town = town;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Player player = (Player) o;
+        return id == player.id && Objects.equals(email, player.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, email);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Player - %s %s\n	Position - %s\n	Team - %s\n	Stadium - %s",
+                this.firstName, this.lastName, this.position.name(), this.team.getName(), this.team.getStadiumName());
+
     }
 }
