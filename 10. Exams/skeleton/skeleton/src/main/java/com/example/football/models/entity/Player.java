@@ -19,7 +19,6 @@ public class Player {
     @Column(unique = true, nullable = false)
     private String email;
 
-    // "dd/MM/yyyy"
     @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
 
