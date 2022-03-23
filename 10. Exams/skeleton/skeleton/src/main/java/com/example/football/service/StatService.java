@@ -1,11 +1,13 @@
 package com.example.football.service;
 
-//ToDo - Implement all methods
+import javax.xml.bind.JAXBException;
+import java.io.IOException;
+
 public interface StatService {
     boolean areImported();
 
-    String readStatsFileContent() ;
+    String readStatsFileContent() throws IOException;
 
-    String importStats() ;
+    String importStats() throws IOException, JAXBException;
 
 }
