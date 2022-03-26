@@ -1,6 +1,7 @@
 package exam.model.entities;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "towns")
@@ -18,17 +19,12 @@ public class Town {
     @Column(name = "travel_guide", nullable = false, columnDefinition = "TEXT")
     private String travelGuide;
 
+//    @ManyToMany(mappedBy = "towns", targetEntity = Customer.class)
+//    private Set<Customer> customers;
 
     public Town() {
 
     }
-
-    public Town(String name, int population, String travelGuide) {
-        this.name = name;
-        this.population = population;
-        this.travelGuide = travelGuide;
-    }
-
 
     public long getId() {
         return id;
@@ -61,4 +57,12 @@ public class Town {
     public void setTravelGuide(String travelGuide) {
         this.travelGuide = travelGuide;
     }
+
+//    public Set<Customer> getCustomers() {
+//        return customers;
+//    }
+//
+//    public void setCustomers(Set<Customer> customers) {
+//        this.customers = customers;
+//    }
 }
