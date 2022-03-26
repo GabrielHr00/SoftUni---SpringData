@@ -10,7 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/export")
 public class ExportController extends BaseController {
 
-
     private final LaptopService laptopService;
 
 
