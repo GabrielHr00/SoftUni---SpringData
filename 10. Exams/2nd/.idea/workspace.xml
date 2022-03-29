@@ -5,34 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a329019-09ba-4c70-be38-33866ed106ab" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/exam/model/dtos/CustomerTownDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/exam/model/dtos/CustomersImportDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/exam/model/dtos/LaptopShopDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/exam/model/dtos/LaptopsImportDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/exam/model/dtos/ShopImportDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/exam/model/dtos/ShopsImportDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/exam/model/dtos/TownImportDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/exam/model/dtos/TownShopDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/exam/model/dtos/TownsImportDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/exam/model/entities/WarrantyType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/exam/service/impl/CustomerServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/exam/service/impl/LaptopServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/exam/service/impl/ShopServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/exam/service/impl/TownServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exam/model/entities/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exam/model/entities/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exam/model/entities/Laptop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exam/model/entities/Laptop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exam/model/entities/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exam/model/entities/Shop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exam/model/entities/Town.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exam/model/entities/Town.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exam/repository/CustomerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exam/repository/CustomerRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exam/repository/LaptopRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exam/repository/LaptopRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exam/repository/ShopRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exam/repository/ShopRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exam/repository/TownRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exam/repository/TownRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exam/service/CustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exam/service/CustomerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exam/service/LaptopService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exam/service/LaptopService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exam/service/ShopService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exam/service/ShopService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exam/service/TownService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exam/service/TownService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exam/web/controllers/ExportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exam/web/controllers/ExportController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../4th/src/main/java/softuni/exam/instagraphlite/models/entities/Picture.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../4th/src/main/java/softuni/exam/instagraphlite/models/entities/Post.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../4th/src/main/java/softuni/exam/instagraphlite/models/entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4th/src/main/java/softuni/exam/instagraphlite/repository/PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../4th/src/main/java/softuni/exam/instagraphlite/repository/PostRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,5 +94,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
