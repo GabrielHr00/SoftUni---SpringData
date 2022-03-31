@@ -1,5 +1,7 @@
 package softuni.exam.instagraphlite.models.dtos;
 
+import softuni.exam.instagraphlite.models.entities.Picture;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -12,7 +14,7 @@ public class ImportUsersDto {
     @Size(min = 4)
     private String password;
 
-    private String picturePath;
+    private UserPictureDto picture;
 
     public ImportUsersDto() {
     }
@@ -25,7 +27,7 @@ public class ImportUsersDto {
         return password;
     }
 
-    public String getProfilePicture() {
-        return picturePath;
+    public UserPictureDto getProfilePicture() {
+        return picture;
     }
 }

@@ -20,6 +20,9 @@ public class User {
     @OneToOne
     private Picture profilePicture;
 
+    @OneToMany
+    private Set<Post> posts;
+
     public User() {
     }
 

@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
 
             if(validate.isEmpty()){
                 System.out.println(p.getProfilePicture());
-                Optional<Picture> byPath = this.pictureRepository.findByPath(p.getProfilePicture());
+                Optional<Picture> byPath = this.pictureRepository.findByPath(p.getProfilePicture().getPath());
                 if(byPath.isEmpty()) {
                     result.add("Invalid User");
                 } else {
@@ -70,6 +70,7 @@ public class UserServiceImpl implements UserService {
                     result.add(String.format("Successfully imported User: %s", user.getUsername()));
                 }
             } else{
+                System.out.println(p.getProfilePicture().getPath());
                 result.add("Invalid User");
             }
         }

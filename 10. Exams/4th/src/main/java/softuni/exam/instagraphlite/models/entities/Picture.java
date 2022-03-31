@@ -1,6 +1,7 @@
 package softuni.exam.instagraphlite.models.entities;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "pictures")
@@ -14,6 +15,12 @@ public class Picture {
 
     @Column(nullable = false)
     private float size;
+
+    @OneToMany
+    private Set<User> users;
+
+    @OneToMany
+    private Set<Post> posts;
 
     public Picture() {
     }
